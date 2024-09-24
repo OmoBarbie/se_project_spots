@@ -1,0 +1,12 @@
+.header {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  /* background-image: url(../images/Logo.svg); */
+}
+
+.header__logo {
+  width: 94px;
+  height: 26px;
+}
