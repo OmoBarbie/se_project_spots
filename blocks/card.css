@@ -31,6 +31,11 @@
   background-color: transparent;
   opacity: 40%;
   margin-top: 12px;
+  cursor: pointer;
+}
+
+.card__like-btn:hover {
+  opacity: 100%;
 }
 
 @media screen and (max-width: 627px) {
@@ -44,13 +49,7 @@
   }
 
   .card__like-btn {
-    background-image: url(../images/heart.svg);
     flex: 0 0 23px;
-    height: 20px;
-    border: none;
-    background-color: transparent;
-    opacity: 40%;
-    margin-top: 12px;
   }
 
   .card__title {
