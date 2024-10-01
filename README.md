@@ -1,6 +1,8 @@
 # Project 3: Spots
 
-This project was created so all the elements are displayed correctly on popular screen sizes on desktops nd mobile devices.
+This project, called spots, was to create an interactive social media web application where users can add and remove photos, like photos of other users, and make a few minor adjustments to their profile.
+
+All the elements are to be displayed correctly on popular screen sizes on desktops and mobile devices.
 The task was to create an interactive webpage where the user can edit, add images, and like images using the prototpe on Figma. The project visually matches the design on Figma and is displayed correctly for all
 screen resolutions, as shown in the design.
 
@@ -54,3 +56,7 @@ Breakpoints are grouped together. The maximum width is set for the content accor
 
 This webpage is deployed to github pages
 https://omobarbie.github.io/se_project_spots/
+
+# video Link
+
+https://www.loom.com/share/d1813d9738424e528b3c35703aa35a25?sid=083e6c3c-9529-4d22-897b-47311df3f73b
