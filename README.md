@@ -60,3 +60,12 @@ https://omobarbie.github.io/se_project_spots/
 # video Link
 
 https://www.loom.com/share/d1813d9738424e528b3c35703aa35a25?sid=083e6c3c-9529-4d22-897b-47311df3f73b
+
+# Project 4 Spots
+
+# Description
+
+Created a .js file and link it to index.html, then stored it in the scripts folder inside the project.
+Created an array and store it in the initialCards variable. The array consisted least six objects, each with two fields: name and link.
+Added data from these objects to the cards on the js.index page.
+The name of the field contained a string with a place name, and the link field contained a URL to the picture of this place.
