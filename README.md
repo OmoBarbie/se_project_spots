@@ -69,3 +69,6 @@ Created a .js file and link it to index.html, then stored it in the scripts fold
 Created an array and store it in the initialCards variable. The array consisted least six objects, each with two fields: name and link.
 Added data from these objects to the cards on the js.index page.
 The name of the field contained a string with a place name, and the link field contained a URL to the picture of this place.
+Marked up and styled for the "Edit profile" modal for both desktop and mobile. Titled two fields "Name" and "Description", and buttons to submit and close the form.
+Used document.querySelector() to select the necessary elements.
+Used the addEventListener() method to listen for click events on necessary buttons.
