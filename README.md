@@ -72,3 +72,10 @@ The name of the field contained a string with a place name, and the link field c
 Marked up and styled for the "Edit profile" modal for both desktop and mobile. Titled two fields "Name" and "Description", and buttons to submit and close the form.
 Used document.querySelector() to select the necessary elements.
 Used the addEventListener() method to listen for click events on necessary buttons.
+Created feature of filling the form fields when opening the modal, form submission, and rendering cards.
+Used the built-in DOM method to add this HTML element to the page.
+
+# Tech Stack
+
+Pass the array item to your getCardElement() function to create a card element.
+JavaScript
