@@ -71,13 +71,25 @@
   font-size: 20px;
   border-radius: 8px;
 }
+.modal__input:hover {
+  border: 1px solid rgb(33, 33, 33);
+}
 
 .modal__submit-btn {
+  font-size: 16px;
+  line-height: 1;
   width: 156px;
   padding: 18px 0;
   background-color: #212121;
   color: #fef5e5;
   border-radius: 8px;
+  border: none;
+  transition: background 0.3s;
+}
+
+.modal__submit-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
 }
 
 @media screen and (max-width: 627px) {
