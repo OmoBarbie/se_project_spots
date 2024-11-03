@@ -38,13 +38,17 @@ const editProfileModalClosedBtn = document.querySelector(".modal__closed-btn");
 const editModalNameInput = editProfileModal.querySelector(
   "#profile-name-input"
 );
+
 const editModalDescriptionInput = editProfileModal.querySelector(
   "#profile-description-input"
 );
 
 // modal submit elements
 const cardSubmitModal = document.querySelector("#add-card-modal");
+const cardFormElement = cardSubmitModal.querySelector(".modal__form");
 const cardSubmitCloseBtn = cardSubmitModal.querySelector(".modal__closed-btn");
+const cardNameInput = cardSubmitModal.querySelector("#add-card-name-input");
+const cardLinkInput = cardSubmitModal.querySelector("#add-card-link-input");
 
 // card related elements
 const cardTemlate = document.querySelector("#card-template");
@@ -57,10 +61,15 @@ function getcardElement(data) {
 
   const cardNameEl = cardElement.querySelector(".card__title");
   const cardImageEl = cardElement.querySelector(".card__image");
+  const cardLikeBtn = cardElement.querySelector(".card__like-btn");
 
   cardNameEl.textContent = data.name;
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
+
+  cardLikeBtn.addEventListener("click", () => {
+   cardLikeBtn.classList.toggle("card__like-btn_liked");
+  )};
 
   return cardElement;
 }
@@ -80,6 +89,14 @@ function handleEditFormSubmit(evt) {
   closeModal(editProfileModal);
 }
 
+function handleAddCardFormSumbit(evt) {
+  evt.preventDefault();
+  const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
+  const cardElement = getcardElement(inputValues);
+  cardsList.prepend(cardElement);
+  closeModal(cardSubmitModal);
+}
+
 profileEditButton.addEventListener("click", () => {
   editModalNameInput.value = profileTitle.textContent;
   editModalDescriptionInput.value = profileDescription.textContent;
@@ -90,28 +107,17 @@ editProfileModalClosedBtn.addEventListener("click", () => {
   closeModal(editProfileModal);
 });
 
-cardSubmitModal.addEventListener("click", () => {
-  openModal(cardSubmitModal);
-});
-
 cardSubmitCloseBtn.addEventListener("click", () => {
   closeModal(cardSubmitModal);
 });
 
-const addCardModal = document.querySelector("#add-card-modal");
-const addCardFormElement = editProfileModal.querySelector(".modal__form");
-
-function openAddCardModal() {
-  addCardModal.classList.add("modal_opened");
-}
-
-function closeAddCardModal() {
-  addCardModal.classList.remove("modal_opened");
-}
-
 const addCardButton = document.querySelector(".profile__add-btn");
-addCardButton.addEventListener("click", openAddCardModal);
-// .addEventListener("click", closeAddCardModal);
+addCardButton.addEventListener("click", () => {
+  openModal(cardSubmitModal);
+});
+
+editFormElement.addEventListener("submit", handleEditFormSubmit);
+cardFormElement.addEventListener("submit", handleAddCardFormSumbit);
 
 initialCards.forEach((item) => {
   const cardElement = getcardElement(item);
