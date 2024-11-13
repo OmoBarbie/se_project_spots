@@ -149,6 +149,16 @@ function getcardElement(data) {
   return cardElement;
 }
 
+function handleAddCardFormSumbit(evt) {
+  evt.preventDefault();
+  const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
+  const cardElement = getcardElement(inputValues);
+  cardsList.prepend(cardElement);
+  // clear the form after submission
+  evt.target.reset();
+  closeModal(cardSubmitModal);
+}
+
 initialCards.forEach((item) => {
   const cardElement = getcardElement(item);
   cardsList.prepend(cardElement);

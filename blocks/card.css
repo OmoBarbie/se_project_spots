@@ -52,6 +52,7 @@
 .card__like-btn_liked:hover {
   background-image: url("../images/like_heart_hover_light.svg");
 }
+
 .card__delete-btn {
   width: 32px;
   height: 32px;
@@ -64,6 +65,7 @@
   position: absolute;
   top: 20px;
   right: 20px;
+  cursor: pointer;
 }
 
 .card__delete-btn:hover {
