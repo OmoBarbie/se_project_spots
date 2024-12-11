@@ -1,6 +1,4 @@
 const showInputError = (formEl, inputEl, errorMsg) => {
-  debugger;
-
   const errorElement = formEl.querySelector(`#${inputEl.id}-error`);
   inputEl.classList.add("modal__input_type_error");
   errorElement.textContent = errorMsg;
