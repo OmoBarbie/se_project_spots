@@ -80,3 +80,12 @@ Used the built-in DOM method to add this HTML element to the page.
 Pass the array item to your getCardElement() function to create a card element.
 JavaScript
 Created Close Modal funtion, the forEach Loop, the Add Card Modal, the Add Card Modal Submission, and Preview modal close button.
+
+# Project 6 Spots
+
+# Description
+
+- Created the validation.js file, implemented the validation code and ensured that the enableValidation function accepts a configuration object as an argument.
+- Improved modal ux
+- Created code a feature that allows the users to close the modal by clicking on the overlay, i.e. anywhere outside the modal’s borders:
+- Created code a feature that allows the users to close the modal by pressing the Escape key.

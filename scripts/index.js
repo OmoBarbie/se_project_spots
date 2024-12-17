@@ -1,3 +1,5 @@
+//TODO - Pass settings object to the validation functions that are called in this file
+
 const initialCards = [
   {
     name: "Val Thorens",
@@ -38,6 +40,7 @@ const profileDescription = document.querySelector(".profile__description");
 // form elements
 const editProfileModal = document.querySelector("#edit-modal");
 const editFormElement = editProfileModal.querySelector(".modal__form");
+const editButtonEl = editFormElement.querySelector(".modal__submit-btn");
 const editProfileModalClosedBtn = document.querySelector(".modal__closed-btn");
 const editModalNameInput = editProfileModal.querySelector(
   "#profile-name-input"
@@ -49,6 +52,7 @@ const editModalDescriptionInput = editProfileModal.querySelector(
 
 // modal submit elements
 const cardSubmitModal = document.querySelector("#add-card-modal");
+const cardSubmitElement = cardSubmitModal.querySelector(".modal__submit-btn");
 const cardFormElement = cardSubmitModal.querySelector(".modal__form");
 const cardCloseBtn = cardSubmitModal.querySelector(".modal__closed-btn");
 const cardNameInput = cardSubmitModal.querySelector("#add-card-name-input");
@@ -83,17 +87,14 @@ function handleEditFormSubmit(evt) {
   closeModal(editProfileModal);
 }
 
-function handleAddCardFormSumbit(evt) {
-  evt.preventDefault();
-  const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
-  const cardElement = getcardElement(inputValues);
-  cardsList.prepend(cardElement);
-  closeModal(cardSubmitModal);
-}
-
 profileEditButton.addEventListener("click", () => {
   editModalNameInput.value = profileTitle.textContent;
   editModalDescriptionInput.value = profileDescription.textContent;
+  // resetValidation(editFormElement, [
+  //   editModalNameInput,
+  //   editModalDescriptionInput,
+  // ]);
+
   openModal(editProfileModal);
 });
 
@@ -157,6 +158,7 @@ function handleAddCardFormSumbit(evt) {
   // clear the form after submission
   evt.target.reset();
   closeModal(cardSubmitModal);
+  disableButton(cardSubmitElement, settings);
 }
 
 initialCards.forEach((item) => {
