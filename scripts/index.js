@@ -72,13 +72,41 @@ function handleDeleteCard(evt) {
   evt.target.closest(".card").remove();
 }
 
+function handleEscape(evt) {
+  if (evt.key === "Escape") {
+    const activeModal = document.querySelector(".modal__opened");
+    console.log("escape clicked");
+    closeModal(activeModal);
+  }
+}
+
 function openModal(modal) {
   modal.classList.add("modal__opened");
+  document.addEventListener("keydown", handleEscape);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal__opened");
+  document.removeEventListener("keydown", handleEscape);
 }
+
+editProfileModal.addEventListener("mousedown", (evt) => {
+  if (evt.target.classList.contains("modal")) {
+    closeModal(editProfileModal);
+  }
+});
+
+cardSubmitModal.addEventListener("mousedown", (evt) => {
+  if (evt.target.classList.contains("modal")) {
+    closeModal(cardSubmitModal);
+  }
+});
+
+previewModalImageEl.addEventListener("mousedown", (evt) => {
+  if (evt.target.classList.contains("modal")) {
+    closeModal(previewModalImageEl);
+  }
+});
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
@@ -90,11 +118,8 @@ function handleEditFormSubmit(evt) {
 profileEditButton.addEventListener("click", () => {
   editModalNameInput.value = profileTitle.textContent;
   editModalDescriptionInput.value = profileDescription.textContent;
-  // resetValidation(editFormElement, [
-  //   editModalNameInput,
-  //   editModalDescriptionInput,
-  // ]);
 
+  resetValidation(editFormElement, settings);
   openModal(editProfileModal);
 });
 
@@ -156,8 +181,9 @@ function handleAddCardFormSumbit(evt) {
   const cardElement = getcardElement(inputValues);
   cardsList.prepend(cardElement);
   // clear the form after submission
-  evt.target.reset();
+
   closeModal(cardSubmitModal);
+  evt.target.reset();
   disableButton(cardSubmitElement, settings);
 }
 
