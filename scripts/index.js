@@ -74,19 +74,19 @@ function handleDeleteCard(evt) {
 
 function handleEscape(evt) {
   if (evt.key === "Escape") {
-    const activeModal = document.querySelector(".modal__opened");
+    const activeModal = document.querySelector(".modal_opened");
     console.log("escape clicked");
     closeModal(activeModal);
   }
 }
 
 function openModal(modal) {
-  modal.classList.add("modal__opened");
+  modal.classList.add("modal_opened");
   document.addEventListener("keydown", handleEscape);
 }
 
 function closeModal(modal) {
-  modal.classList.remove("modal__opened");
+  modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEscape);
 }
 
@@ -102,9 +102,9 @@ cardSubmitModal.addEventListener("mousedown", (evt) => {
   }
 });
 
-previewModalImageEl.addEventListener("mousedown", (evt) => {
+previewModal.addEventListener("mousedown", (evt) => {
   if (evt.target.classList.contains("modal")) {
-    closeModal(previewModalImageEl);
+    closeModal(previewModal);
   }
 });
 

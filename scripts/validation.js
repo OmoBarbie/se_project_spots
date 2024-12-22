@@ -85,7 +85,3 @@ const enableValidation = (config) => {
   });
 };
 enableValidation(settings);
-
-const config = {
-  inputSelector: "",
-};
