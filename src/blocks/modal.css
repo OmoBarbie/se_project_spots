@@ -48,7 +48,7 @@
   display: block;
 }
 
-.modal__closed-btn {
+.modal__close-btn {
   position: absolute;
   top: 32px;
   right: 50px;
@@ -80,11 +80,11 @@
   cursor: pointer;
 }
 
-.modal__closed-btn:hover {
+.modal__close-btn:hover {
   opacity: 100%;
 }
 
-.modal__title {
+.modal__close-btn_avatar .modal__title {
   margin: 0 0 32px;
   font-family: "Poppins", Arial, Helvetica, sans-serif;
   font-weight: 500;

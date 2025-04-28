@@ -49,7 +49,7 @@ const enableButton = (buttonEl, config) => {
   buttonEl.classList.remove(config.inactiveButtonClass);
 };
 
-const disableButton = (buttonEl, config) => {
+export const disableButton = (buttonEl, config) => {
   buttonEl.classList.add(config.inactiveButtonClass);
   buttonEl.disabled = true;
 };

@@ -21,10 +21,10 @@
   /* TODO - Finish mobile avatar buntton styles*/
 }
 
-/*.profile__avatar-container:hover .profile__avatar-btn {
+.profile__avatar-container:hover .profile__avatar-btn {
   visibility: visible;
-  background-image:  ;
-}*/
+  background-image: transparent;
+}
 
 .profile__avatar-btn::after {
   content: "Edit avatar";
