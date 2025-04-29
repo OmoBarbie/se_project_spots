@@ -105,6 +105,7 @@ const avatarLinkInput = avatarSubmitModal.querySelector(
 
 // delete form elements
 const deleteModal = document.querySelector("#delete-modal");
+const deleteForm = deleteModal.querySelector(".modal__form");
 
 // select the modal
 const previewModal = document.querySelector("#preview-modal");
@@ -115,6 +116,9 @@ const previewModalCloseBtn = previewModal.querySelector(".modal__close-btn");
 // card related elements
 const cardTemplate = document.querySelector("#card-template");
 const cardsList = document.querySelector(".cards__list");
+
+let selectedCard;
+let selectedCardId;
 
 function handleDeleteSumbit(evt) {
   const button = evt.target.querySelector(".modal__submit-btn_delete");
@@ -129,6 +133,10 @@ function handleDeleteCard(cardElement, data) {
   selectedCardId = data._id;
   openModal(deleteModal);
 }
+
+// function handleLike(evt) {
+//   evt.target.classList.toggle("card__like-button_active");
+// }
 
 function handleEscape(evt) {
   if (evt.key === "Escape") {
@@ -250,9 +258,13 @@ function getcardElement(data) {
     cardLikeBtn.classList.toggle("card__like-btn_liked");
   });
 
-  cardDeleteBtn.addEventListener("click", () =>
+  cardDeleteBtn.addEventListener("click", (evt) =>
     handleDeleteCard(cardElement, data)
   );
+
+  // deleteForm.addEventListener("submit", handleDeleteSumbit(evt) =>
+  //   handleDeleteCard(cardElement, data)
+  // );
 
   cardImageEl.addEventListener("click", () => {
     openModal(previewModal);
