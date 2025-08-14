@@ -47,8 +47,6 @@ const api = new Api({
   },
 });
 
-console.log(api);
-
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const avatarModalBtn = document.querySelector(".profile__avatar-btn");
@@ -121,6 +119,7 @@ let selectedCard;
 let selectedCardId;
 
 function handleDeleteSumbit(evt) {
+  evt.preventDefault();
   const button = evt.target.querySelector(".modal__submit-btn_delete");
   api.deleteCard(selectedCardId).then(() => {
     selectedCard.remove();
@@ -134,9 +133,22 @@ function handleDeleteCard(cardElement, data) {
   openModal(deleteModal);
 }
 
-// function handleLike(evt) {
-//   evt.target.classList.toggle("card__like-button_active");
-// }
+// what is the event
+// and what do I want to happen which mean use or call teh our function we created
+
+function handleLike(evt, cardData) {
+  const isLiked = evt.classList.contains("card__like-btn_active");
+  console.log("Is card liked", isLiked);
+  api
+    .changeLikeStatus(cardData._id, isLiked)
+    .then(() => {
+      evt.classList.toggle("card__like-btn_active");
+    })
+    .catch(console.error);
+
+  // send a request to the API (call changeCardLike)
+  // then -> change the like status (toggle the class)
+}
 
 function handleEscape(evt) {
   if (evt.key === "Escape") {
@@ -147,6 +159,7 @@ function handleEscape(evt) {
 }
 
 function openModal(modal) {
+  console.log(modal);
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", handleEscape);
 }
@@ -187,7 +200,10 @@ function setUserData(data) {
 }
 
 function handleEditFormSubmit(evt) {
+  console.log("submit it");
   evt.preventDefault();
+  editButtonEl.textContent = "Loading...";
+
   api
     .editUserInfo({
       name: editModalNameInput.value,
@@ -196,7 +212,11 @@ function handleEditFormSubmit(evt) {
     .then((data) => {
       setUserData(data);
     })
-    .catch(console.error);
+    .catch(console.error)
+
+    .finally(() => {
+      editButtonEl.textContent = "Save";
+    });
 
   closeModal(editProfileModal);
 }
@@ -237,7 +257,7 @@ avatarModalBtn.addEventListener("click", () => {
 // TODO - Set up close button listener
 
 editFormElement.addEventListener("submit", handleEditFormSubmit);
-cardFormElement.addEventListener("submit", handleAddCardFormSumbit);
+cardFormElement.addEventListener("submit", handleAddCardFormSubmit);
 avatarFormElement.addEventListener("submit", handleAvatarSumbit);
 
 function getcardElement(data) {
@@ -250,19 +270,31 @@ function getcardElement(data) {
   const cardLikeBtn = cardElement.querySelector(".card__like-btn");
   const cardDeleteBtn = cardElement.querySelector(".card__delete-btn");
 
+  // TODO - If the card is liked, set the active class on the card
+
   cardNameEl.textContent = data.name;
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
 
-  cardLikeBtn.addEventListener("click", () => {
-    cardLikeBtn.classList.toggle("card__like-btn_liked");
+  // Show whether card is liked or not
+
+  if (data.isLiked) {
+    cardLikeBtn.classList.add("card__like-btn_liked");
+  }
+
+  cardLikeBtn.addEventListener("click", (evt) => {
+    handleLike(cardElement, data); // Use API to update the card on the server
+    console.log("Card Liked");
+    cardLikeBtn.classList.toggle("card__like-btn_liked"); // Update teh UI
   });
 
   cardDeleteBtn.addEventListener("click", (evt) =>
     handleDeleteCard(cardElement, data)
   );
 
-  // deleteForm.addEventListener("submit", handleDeleteSumbit(evt) =>
+  deleteForm.addEventListener("submit", (evt) => handleDeleteSumbit(evt));
+
+  // deleteBtn.addEventListener("submit", handleDeleteSumbit(evt) =>
   //   handleDeleteCard(cardElement, data)
   // );
 
@@ -278,16 +310,33 @@ function getcardElement(data) {
   return cardElement;
 }
 
-function handleAddCardFormSumbit(evt) {
+function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
   const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
-  const cardElement = getcardElement(inputValues);
-  cardsList.prepend(cardElement);
-  // clear the form after submission
+  cardSubmitElement.textContent = "Loading...";
+
+  api
+    .addCard(inputValues)
+    .then((res) => {
+      const cardElement = getcardElement(res);
+      cardsList.prepend(cardElement);
+      closeModal(cardSubmitModal);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+
+    .finally(() => {
+      cardSubmitElement.textContent = "Save";
+    });
 }
 
 function handleAvatarSumbit(evt) {
-  evt.preventDefault();
+  // evt.preventDefault();
+
+  const submitLikeBtn = evt.submitter;
+  submitLikeBtn.textContent = "Saving...";
+
   const inputValues = { avatar: avatarLinkInput.value };
 
   // TODO - Call api, editavataruserInfo
@@ -302,8 +351,13 @@ function handleAvatarSumbit(evt) {
       closeModal(avatarModal);
       evt.target.reset();
       disableButton(cardSubmitElement, settings);
+      submitLikeBtn.textContent = "Save";
     })
-    .catch(console.error);
+
+    .catch(console.error)
+    .finally(() => {
+      submitLikeBtn.textContent = "Save";
+    });
 }
 
 enableValidation(settings);

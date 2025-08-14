@@ -64,6 +64,7 @@ export const resetValidation = (formEl, config) => {
   });
   //enable the button
   enableButton(buttonEl, config);
+  console.log(config);
 };
 
 const setEventListeners = (formEl, config) => {

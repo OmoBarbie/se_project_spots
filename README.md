@@ -89,3 +89,14 @@ Created Close Modal funtion, the forEach Loop, the Add Card Modal, the Add Card 
 - Improved modal ux
 - Created code a feature that allows the users to close the modal by clicking on the overlay, i.e. anywhere outside the modal’s borders:
 - Created code a feature that allows the users to close the modal by pressing the Escape key.
+
+# Project 9 Spots
+
+# Description
+
+fetch, catch, finally are the codes to add for the text content of save and loading..
+
+issues I faced
+
+Stuggled with a lot.
+CSS, hrml, the event listeners, and api.
