@@ -83,6 +83,8 @@ Created Close Modal funtion, the forEach Loop, the Add Card Modal, the Add Card 
 
 # Project 6 Spots
 
+Making new API requests and handling the responses using Api classes to encapsulate all the API requests.
+
 # Description
 
 - Created the validation.js file, implemented the validation code and ensured that the enableValidation function accepts a configuration object as an argument.
@@ -100,3 +102,7 @@ issues I faced
 
 Stuggled with a lot.
 CSS, hrml, the event listeners, and api.
+
+# Link to Demo
+
+https://www.loom.com/share/4f3b07407be44d05b8e245ea32f84a89?sid=8a09c5aa-422a-4a4d-a4e6-6fe5943ab1cf

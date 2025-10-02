@@ -89,7 +89,6 @@ const cardFormElement = document.forms["new-post"];
 const cardCloseBtn = cardSubmitModal.querySelector(".modal__close-btn");
 const cardNameInput = cardSubmitModal.querySelector("#add-card-name-input");
 const cardLinkInput = cardSubmitModal.querySelector("#add-card-link-input");
-
 // avatar form elements
 const avatarModal = document.querySelector("#avatar-modal");
 const avatarSubmitModal = document.querySelector("#avatar-modal");
@@ -136,15 +135,20 @@ function handleDeleteCard(cardElement, data) {
 // what is the event
 // and what do I want to happen which mean use or call teh our function we created
 
-function handleLike(evt, cardData) {
-  const isLiked = evt.classList.contains("card__like-btn_active");
+function handleLike(likeButton, cardData) {
+  const isLiked = likeButton.classList.contains("card__like-btn_liked");
   console.log("Is card liked", isLiked);
+  // make a request to like/unlike a card
   api
     .changeLikeStatus(cardData._id, isLiked)
     .then(() => {
-      evt.classList.toggle("card__like-btn_active");
+      // likes the card visually
+      likeButton.classList.toggle("card__like-btn_liked");
     })
-    .catch(console.error);
+    .catch((err) => {
+      console.error(err);
+      alert("Could not like/unlike card");
+    });
 
   // send a request to the API (call changeCardLike)
   // then -> change the like status (toggle the class)
@@ -204,21 +208,25 @@ function handleEditFormSubmit(evt) {
   evt.preventDefault();
   editButtonEl.textContent = "Loading...";
 
+  // make a request to update the userinfo on the server
   api
     .editUserInfo({
       name: editModalNameInput.value,
       about: editModalDescriptionInput.value,
     })
     .then((data) => {
+      // update the user info locally (visually)
       setUserData(data);
+      closeModal(editProfileModal);
     })
-    .catch(console.error)
+    .catch((err) => {
+      alert("Could not edit user info");
+      console.error(err);
+    })
 
     .finally(() => {
       editButtonEl.textContent = "Save";
     });
-
-  closeModal(editProfileModal);
 }
 
 profileEditButton.addEventListener("click", () => {
@@ -283,9 +291,9 @@ function getcardElement(data) {
   }
 
   cardLikeBtn.addEventListener("click", (evt) => {
-    handleLike(cardElement, data); // Use API to update the card on the server
+    handleLike(cardLikeBtn, data); // Use API to update the card on the server
     console.log("Card Liked");
-    cardLikeBtn.classList.toggle("card__like-btn_liked"); // Update teh UI
+    //cardLikeBtn.classList.toggle("card__like-btn_liked"); // Update teh UI
   });
 
   cardDeleteBtn.addEventListener("click", (evt) =>
