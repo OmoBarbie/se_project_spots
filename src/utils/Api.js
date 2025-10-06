@@ -14,12 +14,7 @@ class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      Promise.reject(`Error: ${res.status}`);
-    });
+    }).then(this._handleServerResponse);
   }
 
   //TODO - Implement POST/cards
@@ -49,24 +44,14 @@ class Api {
       body: JSON.stringify({
         avatar,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    }).then(this._handleServerResponse);
   }
 
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      Promise.reject(`Error: ${res.status}`);
-    });
+    }).then(this._handleServerResponse);
   }
 
   addCard({ name, link }) {

@@ -120,10 +120,15 @@ let selectedCardId;
 function handleDeleteSumbit(evt) {
   evt.preventDefault();
   const button = evt.target.querySelector(".modal__submit-btn_delete");
-  api.deleteCard(selectedCardId).then(() => {
-    selectedCard.remove();
-    closeModal(deleteModal);
-  });
+  button.textContent = "deleting...";
+  api
+    .deleteCard(selectedCardId)
+    .then(() => {
+      selectedCard.remove();
+      closeModal(deleteModal);
+    })
+    .catch(console.error)
+    .finally(() => (button.textContent = "delete"));
 }
 
 function handleDeleteCard(cardElement, data) {
@@ -329,6 +334,8 @@ function handleAddCardFormSubmit(evt) {
       const cardElement = getcardElement(res);
       cardsList.prepend(cardElement);
       closeModal(cardSubmitModal);
+      evt.target.reset();
+      disableButton(cardSubmitElement, settings);
     })
     .catch((error) => {
       console.log(error);
@@ -342,8 +349,8 @@ function handleAddCardFormSubmit(evt) {
 function handleAvatarSumbit(evt) {
   // evt.preventDefault();
 
-  const submitLikeBtn = evt.submitter;
-  submitLikeBtn.textContent = "Saving...";
+  const submitBtn = evt.submitter;
+  submitBtn.textContent = "Saving...";
 
   const inputValues = { avatar: avatarLinkInput.value };
 
@@ -358,13 +365,12 @@ function handleAvatarSumbit(evt) {
       setUserData(data);
       closeModal(avatarModal);
       evt.target.reset();
-      disableButton(cardSubmitElement, settings);
-      submitLikeBtn.textContent = "Save";
+      disableButton(submitBtn, settings);
     })
 
     .catch(console.error)
     .finally(() => {
-      submitLikeBtn.textContent = "Save";
+      submitBtn.textContent = "Save";
     });
 }
 
